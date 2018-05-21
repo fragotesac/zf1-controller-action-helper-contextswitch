@@ -139,9 +139,9 @@ class Zend_Controller_Action_Helper_ContextSwitch extends Zend_Controller_Action
                         'post' => 'postJsonContext'
                     )
                 ),
-                'xml'  => array(
-                    'suffix'    => 'xml',
-                    'headers'   => array('Content-Type' => 'application/xml'),
+                'xml' => array(
+                    'suffix'  => 'xml',
+                    'headers' => array('Content-Type' => 'application/xml'),
                 )
             ));
         }
@@ -257,7 +257,6 @@ class Zend_Controller_Action_Helper_ContextSwitch extends Zend_Controller_Action
         // format provided
         if (!$this->hasContext($context)) {
             if (empty($format) || !$this->hasContext($format)) {
-
                 return null;
             }
         }
@@ -315,7 +314,7 @@ class Zend_Controller_Action_Helper_ContextSwitch extends Zend_Controller_Action
         }
 
         $viewRenderer = Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
-        $view = $viewRenderer->view;
+        $view         = $viewRenderer->view;
         if ($view instanceof Zend_View_Interface) {
             $viewRenderer->setNoRender(true);
         }
@@ -390,13 +389,13 @@ class Zend_Controller_Action_Helper_ContextSwitch extends Zend_Controller_Action
                         $this->setSuffix($context, $suffix);
                         break;
                     case (($count == 3) && (null === $context)):
-                        $context = array_shift($suffixInfo);
-                        $suffix  = array_shift($suffixInfo);
+                        $context                   = array_shift($suffixInfo);
+                        $suffix                    = array_shift($suffixInfo);
                         $prependViewRendererSuffix = array_shift($suffixInfo);
                         $this->setSuffix($context, $suffix, $prependViewRendererSuffix);
                         break;
                     case ($count >= 2):
-                        $suffix  = array_shift($suffixInfo);
+                        $suffix                    = array_shift($suffixInfo);
                         $prependViewRendererSuffix = array_shift($suffixInfo);
                         $this->setSuffix($context, $suffix, $prependViewRendererSuffix);
                         break;
@@ -669,7 +668,7 @@ class Zend_Controller_Action_Helper_ContextSwitch extends Zend_Controller_Action
     public function clearHeaders($context)
     {
         $this->hasContext($context, true);
-        $context = (string) $context;
+        $context                              = (string) $context;
         $this->_contexts[$context]['headers'] = array();
         return $this;
     }
@@ -910,8 +909,8 @@ class Zend_Controller_Action_Helper_ContextSwitch extends Zend_Controller_Action
 
         $this->_contexts[$context] = array();
 
-        $this->setSuffix($context,    (isset($spec['suffix'])    ? $spec['suffix']    : ''))
-             ->setHeaders($context,   (isset($spec['headers'])   ? $spec['headers']   : array()))
+        $this->setSuffix($context, (isset($spec['suffix'])    ? $spec['suffix']    : ''))
+             ->setHeaders($context, (isset($spec['headers'])   ? $spec['headers']   : array()))
              ->setCallbacks($context, (isset($spec['callbacks']) ? $spec['callbacks'] : array()));
         return $this;
     }
@@ -1058,9 +1057,9 @@ class Zend_Controller_Action_Helper_ContextSwitch extends Zend_Controller_Action
         }
 
         $viewRenderer = Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
-        $view = $viewRenderer->view;
+        $view         = $viewRenderer->view;
         if ($view instanceof Zend_View_Interface) {
-            if(method_exists($view, 'getVars')) {
+            if (method_exists($view, 'getVars')) {
                 $vars = Zend_Json::encode($view->getVars());
                 $this->getResponse()->setBody($vars);
             } else {
@@ -1091,7 +1090,7 @@ class Zend_Controller_Action_Helper_ContextSwitch extends Zend_Controller_Action
         }
 
         if (true === $context) {
-            $contexts = $this->getContexts();
+            $contexts                           = $this->getContexts();
             $controller->{$contextKey}[$action] = array_keys($contexts);
             return $this;
         }
@@ -1131,7 +1130,7 @@ class Zend_Controller_Action_Helper_ContextSwitch extends Zend_Controller_Action
         }
 
         if (true === $context) {
-            $contexts = $this->getContexts();
+            $contexts                           = $this->getContexts();
             $controller->{$contextKey}[$action] = array_keys($contexts);
         } else {
             $controller->{$contextKey}[$action] = (array) $context;
@@ -1193,7 +1192,7 @@ class Zend_Controller_Action_Helper_ContextSwitch extends Zend_Controller_Action
         $allContexts = $controller->{$contextKey};
 
         if (!is_array($allContexts)) {
-            throw new Zend_Controller_Action_Exception("Invalid contexts found for controller");
+            throw new Zend_Controller_Action_Exception('Invalid contexts found for controller');
         }
 
         if (!isset($allContexts[$action])) {
@@ -1325,4 +1324,3 @@ class Zend_Controller_Action_Helper_ContextSwitch extends Zend_Controller_Action
         return $this->_viewRenderer;
     }
 }
-

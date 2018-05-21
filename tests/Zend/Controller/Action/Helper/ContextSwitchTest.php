@@ -55,14 +55,14 @@ class Zend_Controller_Action_Helper_ContextSwitchTest extends PHPUnit\Framework\
         $this->helper = new Zend_Controller_Action_Helper_ContextSwitch();
         Zend_Controller_Action_HelperBroker::addHelper($this->helper);
 
-        $this->request = new Zend_Controller_Request_Http();
+        $this->request  = new Zend_Controller_Request_Http();
         $this->response = new Zend_Controller_Response_Cli();
 
         $this->front->setRequest($this->request)
                     ->setResponse($this->response)
                     ->addControllerDirectory(dirname(__FILE__));
 
-        $this->view = new Zend_View();
+        $this->view         = new Zend_View();
         $this->viewRenderer = Zend_Controller_Action_HelperBroker::getStaticHelper('viewRenderer');
         $this->viewRenderer->setView($this->view);
 
@@ -343,7 +343,7 @@ class Zend_Controller_Action_Helper_ContextSwitchTest extends PHPUnit\Framework\
     public function testCanOverwriteManyContextsAtOnce()
     {
         $this->helper->setContexts(array(
-            'xml'    => array(
+            'xml' => array(
                 'suffix'    => array('suffix' => 'xml', 'prependViewRendererSuffix' => false),
                 'headers'   => array('Content-Type' => 'application/xml'),
                 'callbacks' => array('TRIGGER_INIT' => 'foobar')
@@ -640,7 +640,7 @@ class Zend_Controller_Action_Helper_ContextSwitchTest extends PHPUnit\Framework\
         }
         $this->assertTrue($found, 'JSON content type header not found');
 
-        $body = $this->response->getBody();
+        $body   = $this->response->getBody();
         $result = Zend_Json::decode($body);
         $this->assertInternalType('array', $result, var_export($body, 1));
         $this->assertTrue(isset($result['foo']));
@@ -755,14 +755,14 @@ class Zend_Controller_Action_Helper_ContextSwitchTest extends PHPUnit\Framework\
     public function getOptions()
     {
         $options = array(
-            'contexts' => array('ajax' => array('suffix' => 'ajax', 'headers' => array('Content-Type' => 'text/x-html')), 'json' => array('suffix' => 'json', 'headers' => array('Content-Type' => 'application/json'), 'callbacks' => array('init' => 'initJsonCallback', 'post' => 'postJsonCallback'))),
+            'contexts'              => array('ajax' => array('suffix' => 'ajax', 'headers' => array('Content-Type' => 'text/x-html')), 'json' => array('suffix' => 'json', 'headers' => array('Content-Type' => 'application/json'), 'callbacks' => array('init' => 'initJsonCallback', 'post' => 'postJsonCallback'))),
             'autoJsonSerialization' => false,
-            'suffix' => array('json' => array('suffix' => 'js', 'prependViewRendererSuffix' => false)),
-            'headers' => array('json' => array('Content-Type' => 'text/js')),
-            'callbacks' => array('json' => array('init' => 'htmlentities')),
-            'contextParam' => 'foobar',
-            'defaultContext' => 'json',
-            'autoDisableLayout' => false,
+            'suffix'                => array('json' => array('suffix' => 'js', 'prependViewRendererSuffix' => false)),
+            'headers'               => array('json' => array('Content-Type' => 'text/js')),
+            'callbacks'             => array('json' => array('init' => 'htmlentities')),
+            'contextParam'          => 'foobar',
+            'defaultContext'        => 'json',
+            'autoDisableLayout'     => false,
         );
         return $options;
     }
@@ -800,7 +800,7 @@ class Zend_Controller_Action_Helper_ContextSwitchTest extends PHPUnit\Framework\
 
     public function testConfigPassedToConstructorShouldSetInstanceState()
     {
-        $config = new Zend_Config($this->getOptions());
+        $config       = new Zend_Config($this->getOptions());
         $this->helper = new Zend_Controller_Action_Helper_ContextSwitch($config);
         $this->checkOptionsAreSet();
     }
@@ -814,7 +814,7 @@ class Zend_Controller_Action_Helper_ContextSwitchTest extends PHPUnit\Framework\
             $this->helper->setAutoJsonSerialization(true);
             $this->helper->postJsonContext();
             $this->assertTrue(true);
-        } catch(Zend_Controller_Action_Exception $zcae) {
+        } catch (Zend_Controller_Action_Exception $zcae) {
             $this->fail('Exception should be throw when view does not implement getVars() method');
         }
     }
@@ -934,35 +934,46 @@ class Zend_Controller_Action_Helper_ContextSwitchTest_LayoutOverride extends Zen
 class Zend_Controller_Action_Helper_ContextSwitchText_CustomView implements Zend_View_Interface
 {
     public function getEngine()
-    {}
+    {
+    }
 
     public function setScriptPath($path)
-    {}
+    {
+    }
 
     public function getScriptPaths()
-    {}
+    {
+    }
 
     public function setBasePath($path, $classPrefix = 'Zend_View')
-    {}
+    {
+    }
 
     public function addBasePath($path, $classPrefix = 'Zend_View')
-    {}
+    {
+    }
 
     public function __set($key, $val)
-    {}
+    {
+    }
 
     public function __isset($key)
-    {}
+    {
+    }
 
     public function __unset($key)
-    {}
+    {
+    }
 
     public function assign($spec, $value = null)
-    {}
+    {
+    }
 
     public function clearVars()
-    {}
+    {
+    }
 
     public function render($name)
-    {}
+    {
+    }
 }
